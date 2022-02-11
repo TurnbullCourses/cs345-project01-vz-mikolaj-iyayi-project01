@@ -196,7 +196,6 @@ class BankAccountTest {
         assertThrows(IllegalArgumentException.class, () -> new BankAccount("2@",67.37)); //false case
         assertThrows(IllegalArgumentException.class, () -> new BankAccount("abc@gmail.com",-900)); //false case
 
->>>>>>> 085273f48b2f5bd76556bde1d88478789bcd718b
     }
 
     @Test
