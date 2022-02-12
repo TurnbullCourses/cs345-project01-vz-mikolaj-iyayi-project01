@@ -46,28 +46,28 @@ public class BankCustomer {
         this.checking = checking;
     }
 
-    // public void depositChecking(double amount) {
-    // checking.deposit(amount);
-    // }
+    public void depositChecking(double amount) {
+    checking.deposit(amount);
+    }
 
-    // public void depositSavings(double amount) {
-    // savings.deposit(amount);
-    // }
+    public void depositSavings(double amount) {
+    savings.deposit(amount);
+    }
 
-    // public boolean withdrawChecking(double amount) {
+    // public void withdrawChecking(double amount) {
     // return checking.withdraw(amount);
     // }
 
-    // public boolean withdrawSavings(double amount) {
+    // public void withdrawSavings(double amount) {
     // return savings.withdraw(amount);
     // }
-    // public double getCheckingBalance() {
-    // return checking.getBalance();
-    // }
+    public double getCheckingBalance() {
+    return checking.getBalance();
+    }
 
-    // public double getSavingsBalance() {
-    // return savings.getBalance();
-    // }
+    public double getSavingsBalance() {
+    return savings.getBalance();
+    }
 
     public String getFirstName() {
         return firstName;
@@ -106,26 +106,18 @@ public class BankCustomer {
     // The following method will look at transfering between checkings and savings
     // account of the customer
     // like transferToChecking and transferToSavings
-
-    public void transferToChecking(SavingsAccount savingsFrom, CheckingAccount checkingsTo, double amount)
-            throws InsufficientFundsException, IllegalArgumentException {
-        if (!BankAccount.isAmountValid(amount)) {
-            throw new IllegalArgumentException("Amount Invalid");
-        } else {
-            savingsFrom.withdraw(amount);
-            checkingsTo.deposit(amount);
-        }
-
+    
+    public void transferWithin(int transferType, double amount, SavingsAccount savings, CheckingAccount checking)  
+    throws InsufficientFundsException, IllegalArgumentException {
+        if (transferType == 1) { //checking->saving
+            checking.withdraw(amount); 
+            savings.deposit(amount); 
+        } 
+        else if (transferType == 2) { //savings->checking
+           savings.withdraw(amount);
+           checking.deposit(amount);
+                
+        } 
     }
 
-    public void transferToSavings(CheckingAccount checkingsFrom, SavingsAccount savingsTo, double amount)
-            throws InsufficientFundsException, IllegalArgumentException {
-        if (!BankAccount.isAmountValid(amount)) {
-            throw new IllegalArgumentException("Amount Invalid");
-        } else {
-            checkingsFrom.withdraw(amount);
-            savingsTo.deposit(amount);
-        }
-
-    }
 }
