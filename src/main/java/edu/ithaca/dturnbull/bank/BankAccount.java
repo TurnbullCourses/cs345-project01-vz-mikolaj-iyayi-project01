@@ -71,7 +71,7 @@ public abstract class BankAccount {
     
     
     // The following method will look at transfering amount between 2 customers
-    public void transferAmount(BankAccount account, double amount) throws InsufficientFundsException, IllegalArgumentException{
+    public void transfer(double amount, BankAccount account) throws InsufficientFundsException, IllegalArgumentException{
         if(!isAmountValid(amount)){
             throw new IllegalArgumentException("Amount Invalid");
         }
@@ -81,20 +81,8 @@ public abstract class BankAccount {
         }
     
     }
-     //The following method will look at transfering between checkings and savings account of the customer
-     public void transferamt(int transferType, double amount) throws InsufficientFundsException {
-        if (transferType == 1) { //checking->saving
-            checking.withdraw(amount);
-            savings.deposit(amount);
-                
-             
-        } else if (transferType == 2) { //savings->checking
-            savings.withdraw(amount);
-            checking.deposit(amount);
-               
-            
-        }
-    }
+    
+    
 
    
 }

@@ -8,12 +8,12 @@ class BankAccountTest {
 
     @Test
     void getBalanceEmailTest() {
-        BankAccount bankAccount = new BankAccount( 200); //balance is non zero, validity of inputs is tested elsewhere as this is just a getter
+        BankAccount bankAccount = new CheckingAccount( 200); //balance is non zero, validity of inputs is tested elsewhere as this is just a getter
 
         assertEquals(200, bankAccount.getBalance(), 0.001);//no need to round floating points as answer should be accurate to 2 decimal places
         
 
-        BankAccount bankAccount2 = new BankAccount( 0); //balance is zero, boundary case
+        BankAccount bankAccount2 = new SavingsAccount(0.1, 0); //balance is zero, boundary case
         assertEquals(0, bankAccount2.getBalance(), 0.001);
         assertEquals(200, bankAccount.getBalance(), 0.001);
 
@@ -21,7 +21,7 @@ class BankAccountTest {
 
     @Test
     void withdrawTest() throws InsufficientFundsException, IllegalArgumentException{
-        BankAccount bankAccount = new BankAccount( 200);
+        BankAccount bankAccount = new CheckingAccount( 200);
         bankAccount.withdraw(100);
 
         assertEquals(100, bankAccount.getBalance(), 0.001);
@@ -35,7 +35,7 @@ class BankAccountTest {
         bankAccount.withdraw(1);
         assertEquals(0, bankAccount.getBalance());
 
-        BankAccount bankAccount2 = new BankAccount( 200);
+        BankAccount bankAccount2 = new SavingsAccount(0.05, 200);
         //amount to withdraw must have no more than 2 decimal places
         assertThrows(IllegalArgumentException.class, () -> bankAccount2.withdraw(0.001));
         assertThrows(IllegalArgumentException.class, () -> bankAccount2.withdraw(0.0132421));
@@ -51,29 +51,29 @@ class BankAccountTest {
         assertEquals(149.89, bankAccount2.getBalance(),0.001);
 
        
-        BankAccount bankAccount3 = new BankAccount( 200);
+        BankAccount bankAccount3 = new CheckingAccount( 200);
         assertThrows(IllegalArgumentException.class, () -> bankAccount3.withdraw(-300));
 
-        BankAccount bankAccount4 = new BankAccount( 3000);
+        BankAccount bankAccount4 = new SavingsAccount( 0.02, 3000);
         assertThrows(IllegalArgumentException.class, () -> bankAccount4.withdraw(-300.376)); //false case
         assertThrows(IllegalArgumentException.class, () -> bankAccount4.withdraw(300.376)); //false case
     }
     @Test
     void depositTest() throws IllegalArgumentException{ // or insuffieient funds exception ?
-         BankAccount bankAccount = new BankAccount( 350);
+         BankAccount bankAccount = new CheckingAccount( 350);
          bankAccount.deposit(100);
          assertEquals(450, bankAccount.getBalance(), 0.001);
          assertThrows(IllegalArgumentException.class, () -> bankAccount.deposit(-300));
 
-         BankAccount bankAccount2 = new BankAccount( 350);
+         BankAccount bankAccount2 = new SavingsAccount(0.05, 350);
          //assertThrows(IllegalArgumentException.class, () -> bankAccount2.deposit(60.970));
          assertThrows(IllegalArgumentException.class, ()-> bankAccount2.deposit(60.975));
 
          //amount deposited must have no more than 2 decimal places
         bankAccount.deposit(0.11);//border case
-        assertEquals(200.11, bankAccount.getBalance(),0.001);
+        assertEquals(450.11, bankAccount.getBalance(),0.001);
         bankAccount.deposit(0.01);//border case
-        assertEquals(200.12, bankAccount.getBalance(),0.001);
+        assertEquals(450.12, bankAccount.getBalance(),0.001);
         assertThrows(IllegalArgumentException.class, ()-> bankAccount.deposit(0.001));
         assertThrows(IllegalArgumentException.class, ()-> bankAccount.deposit(12.21423543));
 
@@ -81,34 +81,18 @@ class BankAccountTest {
         assertThrows(IllegalArgumentException.class, ()-> bankAccount.deposit(-0.01));
         assertThrows(IllegalArgumentException.class, ()-> bankAccount.deposit(-100));
         bankAccount.deposit(0);//border case
-        assertEquals(200.12, bankAccount.getBalance(),0.001);
+        assertEquals(450.12, bankAccount.getBalance(),0.001);
         bankAccount.deposit(100);
-        assertEquals(300.12, bankAccount.getBalance(),0.001);
+        assertEquals(550.12, bankAccount.getBalance(),0.001);
     }
 
     
 
-    
-    @Test
-    void isEmailValidTest(){
-        assertTrue(BankAccount.isEmailValid( "a@b.com")); // correct email format
-        assertFalse( BankAccount.isEmailValid("")); // empty email, it is a border case 
-        assertFalse( BankAccount.isEmailValid("a-@b.cc")); // no dashes before @, border case
-        assertFalse( BankAccount.isEmailValid("a..b@c")); // no consecutive periods, border case
-        assertFalse( BankAccount.isEmailValid(".a@b")); // no non-letters at the first index, border case
-        assertFalse( BankAccount.isEmailValid("a@b")); // length of email cannot be less than or equal to 3, border case
-        assertFalse( BankAccount.isEmailValid("a@")); //length of email must be greater than 3 characters
-        assertFalse( BankAccount.isEmailValid("@")); //length of email must be greater than 3 chracters
-        assertFalse( BankAccount.isEmailValid("a@b.b")); // there must be two letters after the dot, border case
-        assertTrue( BankAccount.isEmailValid("a@b.bb")); // there must be two letters after the dot
-        assertFalse( BankAccount.isEmailValid("a@b.")); // there must be two letters after the dot
-
-    }
 
     @Test
     void transferTest() throws InsufficientFundsException{
-        BankAccount bankAccount = new BankAccount( 200);
-        BankAccount bankAccount2 = new BankAccount( 200);
+        BankAccount bankAccount = new CheckingAccount(200);
+        BankAccount bankAccount2 = new SavingsAccount(0.15, 200);
         
         //amount transferred must be non negative
         assertThrows(IllegalArgumentException.class, ()-> bankAccount.transfer(-0.01, bankAccount2));
@@ -143,33 +127,32 @@ class BankAccountTest {
 
     @Test
     void constructorTest() {
-        BankAccount bankAccount = new BankAccount(200);
+        BankAccount bankAccount = new CheckingAccount(200);
 
         assertEquals(200, bankAccount.getBalance(), 0.001);
-        //check for exception thrown correctly
-        assertThrows(IllegalArgumentException.class, ()-> new BankAccount(100));
+        
+        
 
 
         //input parameters for starting balance must be non negative
-        bankAccount = new BankAccount(10);
+        bankAccount = new CheckingAccount(10);
         assertEquals(10 , bankAccount.getBalance(), 0.001);
-        bankAccount = new BankAccount(0);// border case
+        bankAccount = new CheckingAccount(0);// border case
         assertEquals(0, bankAccount.getBalance(), 0.001);
-        assertThrows(IllegalArgumentException.class, ()-> new BankAccount(-0.01));
-        assertThrows(IllegalArgumentException.class, ()-> new BankAccount(-100));
+        assertThrows(IllegalArgumentException.class, ()-> new CheckingAccount(-0.01));
+        assertThrows(IllegalArgumentException.class, ()-> new CheckingAccount(-100));
 
         //input parameters for starting balance can't have more than 2 decimal spaces
-        bankAccount = new BankAccount(0.01);// border case
+        bankAccount = new SavingsAccount(0.05, 0.01);// border case
         assertEquals(0.01, bankAccount.getBalance(), 0.001);
-        assertThrows(IllegalArgumentException.class, ()-> new BankAccount(0.001));
-        assertThrows(IllegalArgumentException.class, ()-> new BankAccount( 0.1232213));
+        assertThrows(IllegalArgumentException.class, ()-> new SavingsAccount(0.05,0.001));
+        assertThrows(IllegalArgumentException.class, ()-> new SavingsAccount( 0.05,0.1232213));
 
-        BankAccount bankAccount2 = new BankAccount(3000);
-        assertThrows(IllegalArgumentException.class, () -> new BankAccount(-300.376)); 
-        assertThrows(IllegalArgumentException.class, () -> new BankAccount(300.376)); 
+        assertThrows(IllegalArgumentException.class, () -> new SavingsAccount(0.05,-300.376)); 
+        assertThrows(IllegalArgumentException.class, () -> new SavingsAccount(0.05,300.376)); 
 
-        assertThrows(IllegalArgumentException.class, () -> new BankAccount(67.37)); //false case
-        assertThrows(IllegalArgumentException.class, () -> new BankAccount(-900)); //false case
+        assertThrows(IllegalArgumentException.class, () -> new SavingsAccount(0.05,67.377)); //false case
+        assertThrows(IllegalArgumentException.class, () -> new SavingsAccount(0.05,-900)); //false case
 
 
     }

@@ -10,11 +10,38 @@ public class BankCustomer {
     private int accountID;
     private String email;
     public int id;
+    private BankAccount savings;
+    private BankAccount checking;
 
 
-    public BankCustomer(String firstName, String lastName, double checkingsBalance, double savingsBalance) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public BankCustomer(String firstName, String lastName, int accountID, String email, int id) {
+        if(!isEmailValid(email)){
+            this.firstName = firstName;
+            this.lastName = lastName;
+            this.accountID = accountID;
+            this.email = email;
+            this.id = id;
+            savings = null;
+            checking = null;
+        }
+        else{
+            throw new IllegalArgumentException("Invalid email parameter");
+        }
+    }
+
+    /**
+     * Adds a new savings account to the bank customer account
+     * @param savings a new savings account
+     */
+    public void addSavingsAccount(BankAccount savings){
+        this.savings = savings;
+    }
+    /**
+     * Adds a new checking account to the bank customer account
+     * @param checking a new checking account
+     */
+    public void addCheckingAccount(BankAccount checking){
+        this.checking = checking;
     }
 
     // public void depositChecking(double amount) {
@@ -83,9 +110,25 @@ public class BankCustomer {
         }
     }
 
+     //The following method will look at transfering between checkings and savings account of the customer
+     public void transferamt(int transferType, double amount) throws InsufficientFundsException {
+        if (transferType == 1) { //checking->saving
+            checking.withdraw(amount);
+            savings.deposit(amount);
+                
+             
+        } else if (transferType == 2) { //savings->checking
+            savings.withdraw(amount);
+            checking.deposit(amount);
+               
+            
+        }
+    }
+}
+
   
 
 
 
     
-}
+
