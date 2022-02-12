@@ -8,24 +8,20 @@ class BankAccountTest {
 
     @Test
     void getBalanceEmailTest() {
-        BankAccount bankAccount = new BankAccount("a@b.com", 200); //balance is non zero, validity of inputs is tested elsewhere as this is just a getter
+        BankAccount bankAccount = new BankAccount( 200); //balance is non zero, validity of inputs is tested elsewhere as this is just a getter
 
         assertEquals(200, bankAccount.getBalance(), 0.001);//no need to round floating points as answer should be accurate to 2 decimal places
-        assertEquals("a@b.com", bankAccount.getEmail());
+        
 
-        BankAccount bankAccount2 = new BankAccount("cc@boi.ie", 0); //balance is zero, boundary case
+        BankAccount bankAccount2 = new BankAccount( 0); //balance is zero, boundary case
         assertEquals(0, bankAccount2.getBalance(), 0.001);
-        
-        assertEquals("cc@boi.ie", bankAccount2.getEmail());
-        
-
         assertEquals(200, bankAccount.getBalance(), 0.001);
 
     }
 
     @Test
     void withdrawTest() throws InsufficientFundsException, IllegalArgumentException{
-        BankAccount bankAccount = new BankAccount("a@b.com", 200);
+        BankAccount bankAccount = new BankAccount( 200);
         bankAccount.withdraw(100);
 
         assertEquals(100, bankAccount.getBalance(), 0.001);
@@ -39,7 +35,7 @@ class BankAccountTest {
         bankAccount.withdraw(1);
         assertEquals(0, bankAccount.getBalance());
 
-        BankAccount bankAccount2 = new BankAccount("a@b.com", 200);
+        BankAccount bankAccount2 = new BankAccount( 200);
         //amount to withdraw must have no more than 2 decimal places
         assertThrows(IllegalArgumentException.class, () -> bankAccount2.withdraw(0.001));
         assertThrows(IllegalArgumentException.class, () -> bankAccount2.withdraw(0.0132421));
@@ -55,21 +51,21 @@ class BankAccountTest {
         assertEquals(149.89, bankAccount2.getBalance(),0.001);
 
        
-        BankAccount bankAccount3 = new BankAccount("a@b.com", 200);
+        BankAccount bankAccount3 = new BankAccount( 200);
         assertThrows(IllegalArgumentException.class, () -> bankAccount3.withdraw(-300));
 
-        BankAccount bankAccount4 = new BankAccount("a@b.com", 3000);
+        BankAccount bankAccount4 = new BankAccount( 3000);
         assertThrows(IllegalArgumentException.class, () -> bankAccount4.withdraw(-300.376)); //false case
         assertThrows(IllegalArgumentException.class, () -> bankAccount4.withdraw(300.376)); //false case
     }
     @Test
     void depositTest() throws IllegalArgumentException{ // or insuffieient funds exception ?
-         BankAccount bankAccount = new BankAccount("a@b.com", 350);
+         BankAccount bankAccount = new BankAccount( 350);
          bankAccount.deposit(100);
          assertEquals(450, bankAccount.getBalance(), 0.001);
          assertThrows(IllegalArgumentException.class, () -> bankAccount.deposit(-300));
 
-         BankAccount bankAccount2 = new BankAccount("a@b.com", 350);
+         BankAccount bankAccount2 = new BankAccount( 350);
          //assertThrows(IllegalArgumentException.class, () -> bankAccount2.deposit(60.970));
          assertThrows(IllegalArgumentException.class, ()-> bankAccount2.deposit(60.975));
 

@@ -53,6 +53,36 @@ public class BankCustomer {
         return id;
     }
 
+    public static boolean isEmailValid(String email){
+        if (email.indexOf('@') == -1){
+            return false;
+        }
+        else if(email.length() <= 3){
+            return false;
+        }
+        else if(email.isEmpty()){
+                return false;
+        }
+        else if(email.indexOf('@') == 0 || email.indexOf('.') == 0 ){ 
+            return false;
+        }
+        else if(!Character.isLetter(email.charAt(email.indexOf('@') - 1))){ 
+            return false;
+        }
+        else if(email.contains("$") || email.contains("!") || email.contains("#")){ 
+            return false;
+        }
+        else if(email.charAt(email.indexOf('.')) == email.charAt(email.indexOf('.') + 1)){ 
+            return false;
+        }
+        else if(email.lastIndexOf('.')+ 2 >= email.length()){
+            return false;    
+        }
+        else{
+            return true;
+        }
+    }
+
   
 
 
