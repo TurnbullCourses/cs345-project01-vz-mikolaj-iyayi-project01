@@ -173,6 +173,40 @@ class BankAccountTest {
         assertFalse(BankAccount.isAmountValid(10.1111111));//amount must have 2 decimal places or less
 
     }
+    @Test
+    void transferToCheckingTest() throws IllegalArgumentException, InsufficientFundsException{
+        BankCustomer customer1 = new BankCustomer("Mark", "Hemisphere", 32519293, "mark123@gmail.com", 728);
+        SavingsAccount savings1 = new SavingsAccount(1.1, 5000);
+        CheckingAccount checkings1 = new CheckingAccount(2000);
+        customer1.addSavingsAccount(savings1);
+        customer1.addCheckingAccount(checkings1);
+
+        customer1.transferToChecking(savings1, checkings1, 3000);
+        assertEquals(5000, checkings1.getBalance());
+        assertThrows(IllegalArgumentException.class, () -> customer1.transferToChecking(savings1, checkings1, 1290.123)); // checks for decimal places
+        assertThrows(IllegalArgumentException.class, () -> customer1.transferToChecking(savings1, checkings1, -600)); //checks for negative amt
+        
+
+
+    }
+    @Test
+    void transferToSavingsTest() throws IllegalArgumentException, InsufficientFundsException{
+        BankCustomer customer1 = new BankCustomer("Penny", "Heinsfield", 32519293, "penny89@gmail.com", 728);
+        SavingsAccount savingsTo = new SavingsAccount(1.3, 15000);
+        CheckingAccount checkingsFrom = new CheckingAccount(20000);
+        customer1.addSavingsAccount(savingsTo);
+        customer1.addCheckingAccount(checkingsFrom);
+
+        customer1.transferToSavings(checkingsFrom,savingsTo, 3000); 
+        assertEquals(18000, savingsTo.getBalance());
+        assertThrows(IllegalArgumentException.class, () -> customer1.transferToSavings(checkingsFrom, savingsTo, 1240.123)); // checks for decimal places
+        assertThrows(IllegalArgumentException.class, () -> customer1.transferToSavings(checkingsFrom, savingsTo, -400)); //checks for negative amt
+
+
+
+    }
+
+
 
 
 }
