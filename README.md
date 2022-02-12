@@ -12,7 +12,7 @@ Link to UML Use Case Diagram:
 << add linkk here >>
 
 Link to UML Class Diagram:
-<< add link here >>
+https://drive.google.com/file/d/1QepPOXiCENl0DUt6mGvYWG8h99i33QnM/view?usp=sharing
 
 Three Use Cases that you will implement first:
 1. - Create Account
@@ -21,7 +21,7 @@ Three Use Cases that you will implement first:
 
 Which classes & methods do you need to implement for these use cases?
 (Indicated which team member is responsible for the implemenation)
-1. - Abstract Account - MK
+1. - Bank Account - MK
 2. - Checking Account - MK
 3. - Savings Account -MK
 4. constructor - VZ
