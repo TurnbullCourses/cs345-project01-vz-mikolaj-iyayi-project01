@@ -39,7 +39,11 @@ public abstract class BankAccount {
         }
     }
 
-
+    /**
+     * Increases account balance by amount
+     * @param amount
+     * @throws IllegalArgumentException if amount is invalid
+     */
     public void deposit(double amount) throws IllegalArgumentException {
         if (!isAmountValid(amount)) {
             throw new IllegalArgumentException("amount cannot be negative or have more than 2 decimal places");
@@ -49,7 +53,7 @@ public abstract class BankAccount {
         } 
     }
 
-    /**
+    /**verifies the validity of amount
     * @return true if the amount is positive and has two decimal points or less, and false otherwise
     */
     public static boolean  isAmountValid(double amount){
@@ -69,8 +73,14 @@ public abstract class BankAccount {
 
     }
     
+    /**
+     * transfers amount between 2 different accounts
+     * @param amount
+     * @param account
+     * @throws InsufficientFundsException
+     * @throws IllegalArgumentException
+     */
     
-    // The following method will look at transfering amount between 2 customers
     public void transfer(double amount, BankAccount account) throws InsufficientFundsException, IllegalArgumentException{
         if(!isAmountValid(amount)){
             throw new IllegalArgumentException("Amount Invalid");

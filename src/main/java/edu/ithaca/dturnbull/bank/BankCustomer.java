@@ -53,14 +53,6 @@ public class BankCustomer {
     public void depositSavings(double amount) {
     savings.deposit(amount);
     }
-
-    // public void withdrawChecking(double amount) {
-    // return checking.withdraw(amount);
-    // }
-
-    // public void withdrawSavings(double amount) {
-    // return savings.withdraw(amount);
-    // }
     public double getCheckingBalance() {
     return checking.getBalance();
     }
@@ -80,7 +72,11 @@ public class BankCustomer {
     public int getAccountId() {
         return id;
     }
-
+    /**
+     * Checks for validity of email (must have format a@b.cc)
+     * @param email
+     * @return
+     */
     public static boolean isEmailValid(String email) {
         if (email.indexOf('@') == -1) {
             return false;
