@@ -183,37 +183,11 @@ class BankAccountTest {
         
     }
     
-    @Test
-    void transferWithinTest() throws IllegalArgumentException, InsufficientFundsException{
-
-        //checkings to savings
-        BankCustomer customer1 = new BankCustomer("Penny", "Heinsfield", 32519293, "penny89@gmail.com", 728);
-        SavingsAccount savings1 = new SavingsAccount(1.3, 500);
-        CheckingAccount checkings1 = new CheckingAccount(1200);
-
-        customer1.addSavingsAccount(savings1);
-        customer1.addCheckingAccount(checkings1);
-        customer1.transferWithin(1, 1000, savings1, checkings1);
-        assertEquals(200, checkings1.getBalance());
-        assertThrows(IllegalArgumentException.class, () -> customer1.transferWithin(1, 100.111, savings1, checkings1));
-        assertThrows(IllegalArgumentException.class, () -> customer1.transferWithin(1, -100, savings1, checkings1));
-
-       
-        //savings to checkings
-        BankCustomer customer2 = new BankCustomer("Hannah", "Montana", 32519293, "hannah89@gmail.com", 728);
-        SavingsAccount savings2 = new SavingsAccount(1.3, 500);
-        CheckingAccount checkings2 = new CheckingAccount(200);
-
-        customer1.addSavingsAccount(savings2);
-        customer1.addCheckingAccount(checkings2);
-        customer2.transferWithin(2, 450, savings2, checkings2);
-        assertEquals(50, savings2.getBalance());
-        assertThrows(IllegalArgumentException.class, () -> customer2.transferWithin(2, 100.111, savings2, checkings2));
-        assertThrows(IllegalArgumentException.class, () -> customer2.transferWithin(2, -100, savings2, checkings2));
+   
 
 
 
-    }
+    
 
 
 
