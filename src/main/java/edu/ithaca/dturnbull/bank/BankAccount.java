@@ -96,8 +96,13 @@ public abstract class BankAccount {
      * @param interestRate 
      */
     public void calcInterest(double interestRate){
+        if(!isAmountValid(interestRate)){
+            throw new IllegalArgumentException("Amount Invalid");
+        }
+        else{
         double interest = this.balance * interestRate/100.0;
         this.balance = this.balance + interest;
+        }
     }
 
     

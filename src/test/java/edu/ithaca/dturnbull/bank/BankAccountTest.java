@@ -180,7 +180,6 @@ class BankAccountTest {
         assertEquals(506.5, account1.getBalance());
         assertThrows(IllegalArgumentException.class, ()-> account1.calcInterest(-1.3));
         assertThrows(IllegalArgumentException.class, () -> account1.calcInterest(-10000.3));
-  
         
     }
     
