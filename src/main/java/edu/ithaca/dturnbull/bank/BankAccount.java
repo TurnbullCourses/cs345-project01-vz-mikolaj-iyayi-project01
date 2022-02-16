@@ -91,6 +91,16 @@ public abstract class BankAccount {
         }
     
     }
+    /**
+     *calculate and add interest to the balance
+     * @param interestRate 
+     */
+    public void calcInterest(double interestRate){
+        double interest = this.balance * interestRate/100.0;
+        this.balance = this.balance + interest;
+    }
+
+    
     
     
 

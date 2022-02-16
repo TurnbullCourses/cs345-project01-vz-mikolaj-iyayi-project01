@@ -173,6 +173,16 @@ class BankAccountTest {
         assertFalse(BankAccount.isAmountValid(10.1111111));//amount must have 2 decimal places or less
 
     }
+    @Test
+    void calcInterestTest() throws IllegalArgumentException{
+        BankAccount account1 = new SavingsAccount(1.3, 500);
+        account1.calcInterest(1.3);
+        assertEquals(506.5, account1.getBalance());
+        assertThrows(IllegalArgumentException.class, ()-> account1.calcInterest(-1.3));
+        assertThrows(IllegalArgumentException.class, () -> account1.calcInterest(-10000.3));
+  
+        
+    }
     
     @Test
     void transferWithinTest() throws IllegalArgumentException, InsufficientFundsException{
