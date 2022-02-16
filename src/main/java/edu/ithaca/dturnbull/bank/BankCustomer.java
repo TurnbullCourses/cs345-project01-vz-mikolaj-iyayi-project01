@@ -99,21 +99,26 @@ public class BankCustomer {
         }
     }
 
-    // The following method will look at transfering between checkings and savings
-    // account of the customer
-    // like transferToChecking and transferToSavings
     
-    public void transferWithin(int transferType, double amount, SavingsAccount savings, CheckingAccount checking)  
-    throws InsufficientFundsException, IllegalArgumentException {
-        if (transferType == 1) { //checking->saving
-            checking.withdraw(amount); 
-            savings.deposit(amount); 
-        } 
-        else if (transferType == 2) { //savings->checking
-           savings.withdraw(amount);
-           checking.deposit(amount);
-                
-        } 
+    
+    /**
+     * Transfers funds from the client's checking to his savings account
+     * @param amount
+     * @throws InsufficientFundsException if the amount would overdraw the checking account
+     */
+    public void checkingToSavings(double amount) throws InsufficientFundsException{
+        checking.withdraw(amount);
+        savings.deposit(amount);
+    }
+
+    /**
+     * transfers funds from the client's savings to his checking account
+     * @param amount
+     * @throws InsufficientFundsException if the amount would overdraw the savings account
+     */
+    public void savingsToChecking(double amount) throws InsufficientFundsException{
+        savings.withdraw(amount);
+        checking.deposit(amount);
     }
 
 }
