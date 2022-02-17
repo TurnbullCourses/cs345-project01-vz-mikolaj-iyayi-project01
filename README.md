@@ -10,7 +10,6 @@ VZ
 
 Link to UML Use Case Diagram:
 https://drive.google.com/file/d/1PBnoPclWC3KX2_G8p3DDToLi6Wp4oM4f/view?usp=sharing
-here
 
 Link to UML Class Diagram:
 https://drive.google.com/file/d/1QepPOXiCENl0DUt6mGvYWG8h99i33QnM/view?usp=sharing
@@ -22,15 +21,15 @@ Three Use Cases that you will implement first:
 
 Which classes & methods do you need to implement for these use cases?
 (Indicated which team member is responsible for the implemenation)
-1. - Bank Account - MK
-2. - Checking Account - MK
-3. - Savings Account -MK
+1. BankAccount - MK
+2. CheckingAccount - MK
+3. SavingsAccount -MK
 4. constructor - VZ
 5. withdraw - VZ
 6. deposit - VZ
-7. Abstract Teller -Iyayi
-8. ATM -Iyayi
-9. Bank Teller -Iyayi
+7. Teller - Iyayi
+8. ATM - Iyayi
+9. BankTeller - Iyayi
 
 Don't forget to use Test-Driven Development (TDD)
 1. Write Class and Method Function Headers
