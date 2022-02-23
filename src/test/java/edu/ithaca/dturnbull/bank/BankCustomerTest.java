@@ -10,7 +10,7 @@ public class BankCustomerTest {
     @Test
     public void savingsCheckingTest() throws InsufficientFundsException{
         
-        BankCustomer client = new BankCustomer("Penny", "Heinsfield", 32519293, "penny89@gmail.com", 728, false);
+        BankCustomer client = new BankCustomer("Penny", "Heinsfield", 32519293, "penny89@gmail.com", 728);
         client.addCheckingAccount(new CheckingAccount(1000));
         client.addSavingsAccount(new SavingsAccount(0.05, 0));
 

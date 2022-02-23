@@ -6,10 +6,10 @@ public class Admin {
     }
 
     public static void freezeAccount(BankCustomer customer){
-        customer.status = true;
+        customer.frozen = true;
     }
     public static void unfreezeAccount(BankCustomer customer){
-        customer.status = false;
+        customer.frozen = false;
     }
 
     

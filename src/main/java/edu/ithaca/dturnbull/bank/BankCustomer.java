@@ -1,5 +1,7 @@
 package edu.ithaca.dturnbull.bank;
 
+import java.util.MissingResourceException;
+
 /**
  * BankCustomer
  * This class will help users to make, manage and look over their accounts
@@ -13,9 +15,9 @@ public class BankCustomer {
     public int id;
     private SavingsAccount savings;
     private CheckingAccount checking;
-    protected boolean status;
+    protected boolean frozen;
 
-    public BankCustomer(String firstName, String lastName, int accountID, String email, int id, boolean status) {
+    public BankCustomer(String firstName, String lastName, int accountID, String email, int id) {
         if (!isEmailValid(email)) {
             this.firstName = firstName;
             this.lastName = lastName;
@@ -24,7 +26,7 @@ public class BankCustomer {
             this.id = id;
             savings = null;
             checking = null;
-            this.status = false;
+            this.frozen = false;
         } else {
             throw new IllegalArgumentException("Invalid email parameter");
         }
@@ -48,13 +50,67 @@ public class BankCustomer {
         this.checking = checking;
     }
 
-    public void depositChecking(double amount) {
-    checking.deposit(amount);
+    public void depositChecking(double amount) throws FrozenException {
+        if(checking == null){
+            throw new NullPointerException("There is no checking account for this customer"); 
+        }
+        if(frozen){
+            throw new FrozenException("cannot deposit on frozen account");
+        }
+        else{checking.deposit(amount);}
+    
     }
 
-    public void depositSavings(double amount) {
-    savings.deposit(amount);
+    public void depositSavings(double amount) throws FrozenException{
+        if(savings == null){
+            throw new NullPointerException("There is no savings account for this customer"); 
+        }
+        if(frozen){
+            throw new FrozenException("cannot deposit on frozen account");
+        }
+        savings.deposit(amount);
     }
+
+    public void withdrawSavings(double amount) throws FrozenException, InsufficientFundsException{
+        if(savings == null){
+            throw new NullPointerException("There is no savings account for this customer"); 
+        }
+        if(frozen){
+            throw new FrozenException("cannot withdraw on frozen account");
+        }
+        savings.withdraw(amount);
+    }
+
+    public void withdrawChecking(double amount) throws FrozenException, InsufficientFundsException{
+        if(checking == null){
+            throw new NullPointerException("There is no checking account for this customer"); 
+        }
+        if(frozen){
+            throw new FrozenException("cannot withdraw on frozen account");
+        }
+        checking.withdraw(amount);
+    }
+
+    public void transferChecking(double amount, BankAccount transferee) throws FrozenException, InsufficientFundsException{
+        if(checking == null){
+            throw new NullPointerException("There is no checking account for this customer"); 
+        }
+        if(frozen){
+            throw new FrozenException("cannot transfer on frozen account");
+        }
+        checking.transfer(amount, transferee);
+    }
+
+    public void transferSavings(double amount, BankAccount transferee) throws FrozenException, InsufficientFundsException{
+        if(savings == null){
+            throw new NullPointerException("There is no savings account for this customer"); 
+        }
+        if(frozen){
+            throw new FrozenException("cannot transfer on frozen account");
+        }
+        savings.transfer(amount, transferee);
+    }
+
     public double getCheckingBalance() {
     return checking.getBalance();
     }
