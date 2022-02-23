@@ -13,8 +13,9 @@ public class BankCustomer {
     public int id;
     private SavingsAccount savings;
     private CheckingAccount checking;
+    protected boolean status;
 
-    public BankCustomer(String firstName, String lastName, int accountID, String email, int id) {
+    public BankCustomer(String firstName, String lastName, int accountID, String email, int id, boolean status) {
         if (!isEmailValid(email)) {
             this.firstName = firstName;
             this.lastName = lastName;
@@ -23,6 +24,7 @@ public class BankCustomer {
             this.id = id;
             savings = null;
             checking = null;
+            this.status = false;
         } else {
             throw new IllegalArgumentException("Invalid email parameter");
         }

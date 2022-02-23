@@ -26,7 +26,10 @@ public abstract class BankAccount {
     /**
      * @post reduces the balance by amount if amount is non-negative and smaller than balance
      */
-    public void withdraw (double amount) throws InsufficientFundsException{
+    public void withdraw (double amount, BankCustomer customer) throws InsufficientFundsException, FrozenException{
+        if(checkFrozen(customer)){
+            throw new FrozenException("cannot withdraw on frozen account");
+        }
         if(!isAmountValid(amount)){
             throw new IllegalArgumentException("amount cannot be negative or have more than 2 decimal places");
 
@@ -43,8 +46,12 @@ public abstract class BankAccount {
      * Increases account balance by amount
      * @param amount
      * @throws IllegalArgumentException if amount is invalid
+     * @throws FrozenException
      */
-    public void deposit(double amount) throws IllegalArgumentException {
+    public void deposit(double amount, BankCustomer customer) throws IllegalArgumentException, FrozenException {
+        if(checkFrozen(customer)){
+            throw new FrozenException("cannot withdraw on frozen account");
+        }
         if (!isAmountValid(amount)) {
             throw new IllegalArgumentException("amount cannot be negative or have more than 2 decimal places");
         }
@@ -79,15 +86,19 @@ public abstract class BankAccount {
      * @param account
      * @throws InsufficientFundsException
      * @throws IllegalArgumentException
+     * @throws FrozenException
      */
     
-    public void transfer(double amount, BankAccount account) throws InsufficientFundsException, IllegalArgumentException{
+    public void transfer(double amount, BankAccount account, BankCustomer customer) throws InsufficientFundsException, IllegalArgumentException, FrozenException{
+        if(checkFrozen(customer)){
+            throw new FrozenException("cannot withdraw on frozen account");
+        }
         if(!isAmountValid(amount)){
             throw new IllegalArgumentException("Amount Invalid");
         }
         else{
-           withdraw(amount);
-            account.deposit(amount); //account to which we trasfer to
+           withdraw(amount, customer);
+            account.deposit(amount, customer); //account to which we trasfer to
         }
     
     }
@@ -103,6 +114,16 @@ public abstract class BankAccount {
         double interest = this.balance * interestRate/100.0;
         this.balance = this.balance + interest;
         }
+    }
+
+    public static boolean checkFrozen(BankCustomer customer) {
+        if(customer.status == true){
+           return true;
+        }
+        else{
+            return false;
+        }
+        
     }
 
     
