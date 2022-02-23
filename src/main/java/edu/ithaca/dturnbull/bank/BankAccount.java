@@ -17,6 +17,10 @@ public abstract class BankAccount {
         
     }
 
+    /**
+     * returns the current balance in the bank account
+     * @return
+     */
     public double getBalance(){
         return balance;
     }

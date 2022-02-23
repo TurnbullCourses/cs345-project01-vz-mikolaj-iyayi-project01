@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 public class BankCustomerTest {
 
     @Test
-    public void savingsCheckingTest() throws InsufficientFundsException{
+    public void savingsCheckingTest() throws InsufficientFundsException, FrozenException{
         
         BankCustomer client = new BankCustomer("Penny", "Heinsfield", 32519293, "penny89@gmail.com", 728);
         client.addCheckingAccount(new CheckingAccount(1000));
