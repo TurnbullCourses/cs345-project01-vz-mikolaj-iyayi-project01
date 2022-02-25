@@ -17,6 +17,11 @@ https://drive.google.com/file/d/1QepPOXiCENl0DUt6mGvYWG8h99i33QnM/view?usp=shari
 Link to Sequence diagrams:-
 1) Admin: - https://drive.google.com/file/d/1SrGlF0_iob0syA0sySCfesPhyAHfG9cn/view?usp=sharing 
     USE CASE:- Freezing Account
+2) Bank Customer: - https://drive.google.com/file/d/1XW8tthVlRbPR4E1SQdONYssVUfHLKmmA/view?usp=sharing
+    USE CASE:- transfer funds from checking to other bank account
+    
+Link to State Diagram:-
+https://drive.google.com/file/d/1yBMlYdyP8VAGMPBVOUd0q5-2uv-WOZNN/view?usp=sharing
 
 Work Breakdown
 
