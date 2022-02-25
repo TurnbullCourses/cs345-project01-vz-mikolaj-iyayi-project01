@@ -30,6 +30,7 @@ Implemented constructor, deposit, and withdraw. Worked on Bank Customer and adde
 and created calcInterest method & Tests. Made and added code to 2 branches - admin & VZbranch. Also worked on the admin sequence digram & state diagram.
 
 Mikolaj:-
+Helped design tests for bank customer related use cases and edited admin integration tests. Designed and implemented simple text user interface, and bank account classes. Modified classes to match client statement (freezing accounts as opposed to customer). Did a sequence diagram  for transfer and state diagram for user interface.
 
 
 Iyayi:- 
