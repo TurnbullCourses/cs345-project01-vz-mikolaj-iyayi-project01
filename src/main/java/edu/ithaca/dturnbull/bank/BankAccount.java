@@ -1,7 +1,13 @@
 package edu.ithaca.dturnbull.bank;
 
-public abstract class BankAccount {
+/**
+ * BankAccount
+ * represents a customers account and operations
+ * @author Vaibhav Zaveri
+ * @date 2/25/2022
+ */
 
+public abstract class BankAccount {
     
     private double balance;
     protected boolean frozen;

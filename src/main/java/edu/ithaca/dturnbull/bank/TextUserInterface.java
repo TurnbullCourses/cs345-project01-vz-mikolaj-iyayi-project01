@@ -1,5 +1,12 @@
 package edu.ithaca.dturnbull.bank;
 
+/**
+ * TextUserInterface
+ * This class helps a customer go through the banking journey
+ * @author Mikolaj
+ * @date 2/25/2022
+ */
+
 import java.util.Random;
 import java.util.Scanner;
 

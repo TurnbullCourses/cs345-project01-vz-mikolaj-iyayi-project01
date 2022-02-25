@@ -5,6 +5,9 @@ import java.util.MissingResourceException;
 /**
  * BankCustomer
  * This class will help users to make, manage and look over their accounts
+ * @author Vaibhav Zaveri
+ * @author Mikolaj
+ * @date 2/25/2022
  */
 public class BankCustomer {
 
@@ -15,7 +18,15 @@ public class BankCustomer {
     public int id;
     private SavingsAccount savings;
     private CheckingAccount checking;
-    
+
+    /**
+    * constructor
+    * @param firstName first name
+    * @param lastName  last name
+    * @param accountID account ID
+    * @param email email address
+    * @param id ID
+    */
 
     public BankCustomer(String firstName, String lastName, int accountID, String email, int id) {
         if (!isEmailValid(email)) {

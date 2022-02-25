@@ -1,3 +1,10 @@
+/**
+ * Admin
+ * represents functions of an Admin
+ * @author Vaibhav Zaveri
+ * @date 2/25/2022
+ */
+
 package edu.ithaca.dturnbull.bank;
 
 public class Admin {
