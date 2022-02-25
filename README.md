@@ -15,7 +15,8 @@ Link to UML Class Diagram:
 https://drive.google.com/file/d/1QepPOXiCENl0DUt6mGvYWG8h99i33QnM/view?usp=sharing
 
 Link to Sequence diagrams:-
-1) Admin: - https://drive.google.com/file/d/1SrGlF0_iob0syA0sySCfesPhyAHfG9cn/view?usp=sharing
+1) Admin: - https://drive.google.com/file/d/1SrGlF0_iob0syA0sySCfesPhyAHfG9cn/view?usp=sharing 
+    USE CASE:- Freezing Account
 
 Three Use Cases that you will implement first:
 1. - Create Account
