@@ -21,12 +21,8 @@ Link to Sequence diagrams:-
 Work Breakdown
 
 VZ:-
-Implemented constructor, deposit, and withdraw
-Worked on Bank Customer
-Added IsEMailValid, edidted tests for Bank Account, added transfer method.
-Created calcInterest method & Tests
-Made admin & VZbranch
-Worked on the admin sequence digram & state diagram.
+Implemented constructor, deposit, and withdraw. Worked on Bank Customer and added IsEMailValid, edidted tests for Bank Account. Added transfer method, 
+and created calcInterest method & Tests. Made and added code to 2 branches - admin & VZbranch. Also worked on the admin sequence digram & state diagram.
 
 Mikolaj:-
 
