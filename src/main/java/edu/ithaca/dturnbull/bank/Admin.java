@@ -5,19 +5,19 @@ public class Admin {
     
     }
     /**
-     * freezes and limits the customer's interaction with their bank accounts
-     * @param customer
+     * freezes the bank account
+     * @param account
      */
-    public static void freezeAccount(BankCustomer customer){
-        customer.frozen = true;
+    public static void freezeAccount(BankAccount account){
+        account.frozen = true;
     }
 
     /**
      * if the customer's account is frozen, it enables all bank account features
-     * @param customer
+     * @param account
      */
-    public static void unfreezeAccount(BankCustomer customer){
-        customer.frozen = false;
+    public static void unfreezeAccount(BankAccount account){
+        account.frozen = false;
     }
 
     

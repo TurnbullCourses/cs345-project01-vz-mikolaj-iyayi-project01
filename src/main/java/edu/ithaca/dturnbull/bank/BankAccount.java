@@ -4,6 +4,7 @@ public abstract class BankAccount {
 
     
     private double balance;
+    protected boolean frozen;
     
 
     /**
@@ -14,6 +15,7 @@ public abstract class BankAccount {
             throw new IllegalArgumentException("invalid amount entered");
         }
             this.balance = startingBalance;
+            frozen = false;
         
     }
 
@@ -30,7 +32,10 @@ public abstract class BankAccount {
     /**
      * @post reduces the balance by amount if amount is non-negative and smaller than balance
      */
-    public void withdraw (double amount) throws InsufficientFundsException{
+    public void withdraw (double amount) throws InsufficientFundsException, FrozenException{
+        if(frozen){
+            throw new FrozenException("This account has been frozen");
+        }
         
         if(!isAmountValid(amount)){
             throw new IllegalArgumentException("amount cannot be negative or have more than 2 decimal places");
@@ -49,7 +54,10 @@ public abstract class BankAccount {
      * @param amount
      * @throws IllegalArgumentException if amount is invalid
      */
-    public void deposit(double amount) throws IllegalArgumentException{
+    public void deposit(double amount) throws IllegalArgumentException, FrozenException{
+        if(frozen){
+            throw new FrozenException("This account has been frozen");
+        }
         
         if (!isAmountValid(amount)) {
             throw new IllegalArgumentException("amount cannot be negative or have more than 2 decimal places");
@@ -87,7 +95,13 @@ public abstract class BankAccount {
      * @throws IllegalArgumentException
      */
     
-    public void transfer(double amount, BankAccount account) throws InsufficientFundsException, IllegalArgumentException{
+    public void transfer(double amount, BankAccount account) throws InsufficientFundsException, IllegalArgumentException, FrozenException{
+        if(frozen){
+            throw new FrozenException("This account has been frozen");
+        }
+        else if(account.frozen){
+            throw new FrozenException("the transferee's account has been frozen");
+        }
         
         if(!isAmountValid(amount)){
             throw new IllegalArgumentException("Amount Invalid");

@@ -20,7 +20,7 @@ class BankAccountTest {
     }
 
     @Test
-    void withdrawTest() throws InsufficientFundsException, IllegalArgumentException{
+    void withdrawTest() throws InsufficientFundsException, IllegalArgumentException, FrozenException{
         BankAccount bankAccount = new CheckingAccount( 200);
         bankAccount.withdraw(100);
 
@@ -59,7 +59,7 @@ class BankAccountTest {
         assertThrows(IllegalArgumentException.class, () -> bankAccount4.withdraw(300.376)); //false case
     }
     @Test
-    void depositTest() throws IllegalArgumentException{ // or insuffieient funds exception ?
+    void depositTest() throws IllegalArgumentException, FrozenException{ 
          BankAccount bankAccount = new CheckingAccount( 350);
          bankAccount.deposit(100);
          assertEquals(450, bankAccount.getBalance(), 0.001);
@@ -90,7 +90,7 @@ class BankAccountTest {
 
 
     @Test
-    void transferTest() throws InsufficientFundsException{
+    void transferTest() throws InsufficientFundsException, FrozenException{
         BankAccount bankAccount = new CheckingAccount(200);
         BankAccount bankAccount2 = new SavingsAccount(0.15, 200);
         

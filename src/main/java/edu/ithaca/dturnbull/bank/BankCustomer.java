@@ -15,7 +15,7 @@ public class BankCustomer {
     public int id;
     private SavingsAccount savings;
     private CheckingAccount checking;
-    protected boolean frozen;
+    
 
     public BankCustomer(String firstName, String lastName, int accountID, String email, int id) {
         if (!isEmailValid(email)) {
@@ -26,7 +26,7 @@ public class BankCustomer {
             this.id = id;
             savings = null;
             checking = null;
-            this.frozen = false;
+            
         } else {
             throw new IllegalArgumentException("Invalid email parameter");
         }
@@ -58,9 +58,6 @@ public class BankCustomer {
         if(checking == null){
             throw new NullPointerException("There is no checking account for this customer"); 
         }
-        if(frozen){
-            throw new FrozenException("cannot deposit on frozen account");
-        }
         else{checking.deposit(amount);}
     
     }
@@ -73,9 +70,7 @@ public class BankCustomer {
         if(savings == null){
             throw new NullPointerException("There is no savings account for this customer"); 
         }
-        if(frozen){
-            throw new FrozenException("cannot deposit on frozen account");
-        }
+        
         savings.deposit(amount);
     }
     /**
@@ -88,9 +83,7 @@ public class BankCustomer {
         if(savings == null){
             throw new NullPointerException("There is no savings account for this customer"); 
         }
-        if(frozen){
-            throw new FrozenException("cannot withdraw on frozen account");
-        }
+        
         savings.withdraw(amount);
     }
     /**
@@ -103,9 +96,7 @@ public class BankCustomer {
         if(checking == null){
             throw new NullPointerException("There is no checking account for this customer"); 
         }
-        if(frozen){
-            throw new FrozenException("cannot withdraw on frozen account");
-        }
+        
         checking.withdraw(amount);
     }
     /**
@@ -119,9 +110,7 @@ public class BankCustomer {
         if(checking == null){
             throw new NullPointerException("There is no checking account for this customer"); 
         }
-        if(frozen){
-            throw new FrozenException("cannot transfer on frozen account");
-        }
+        
         checking.transfer(amount, transferee);
     }
     /**
@@ -135,9 +124,7 @@ public class BankCustomer {
         if(savings == null){
             throw new NullPointerException("There is no savings account for this customer"); 
         }
-        if(frozen){
-            throw new FrozenException("cannot transfer on frozen account");
-        }
+        
         savings.transfer(amount, transferee);
     }
     /**
@@ -204,36 +191,6 @@ public class BankCustomer {
         if (email.indexOf('@') == -1){
             return false;
         }
-        
-
-        int size = email.length();
-        
-        boolean flag = true;
-        for(int i = 0; i < size; i++){
-            if ((email.charAt(i)=='.')||(email.charAt(i)=='-')||(email.charAt(i)=='_')||(email.charAt(i)=='@')){
-                if(flag){
-                    return false;
-                }
-                flag = true;
-            }
-            else{
-                flag = false;
-            }
-            if(email.charAt(i)=='#'){
-                return false;
-            }
-        }
-        if (email.charAt(size-1)=='.' || email.charAt(size-2)== '.'){
-            return false;
-        }
-        for(int i = email.indexOf('@'); i < size; i++){
-            if(email.charAt(i)=='.'){
-                break;
-            }
-            else if(i == (size-1)){
-                return false;
-            }
-        }
         return true;
     }
 
@@ -251,8 +208,7 @@ public class BankCustomer {
         if(savings == null){
             throw new NullPointerException("There is no savings account for this customer"); 
         }
-        withdrawChecking(amount);
-        depositSavings(amount);
+        checking.transfer(amount, savings);
     }
 
     /**
@@ -267,8 +223,7 @@ public class BankCustomer {
         if(savings == null){
             throw new NullPointerException("There is no savings account for this customer"); 
         }
-        withdrawSavings(amount);
-        depositChecking(amount);
+        savings.transfer(amount, checking);
     }
 
 }
