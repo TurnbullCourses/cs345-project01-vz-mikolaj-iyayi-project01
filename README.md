@@ -17,13 +17,21 @@ https://drive.google.com/file/d/1QepPOXiCENl0DUt6mGvYWG8h99i33QnM/view?usp=shari
 Link to Sequence diagrams:-
 1) Admin: - https://drive.google.com/file/d/1SrGlF0_iob0syA0sySCfesPhyAHfG9cn/view?usp=sharing 
     USE CASE:- Freezing Account
-2) Bank Customer: - https://drive.google.com/file/d/1H8qnSZIZflorkhzNm38aUA89rSNKSLMD/view?usp=sharing
-    USE CASE:- Transfer funds from checking to other account
 
-Three Use Cases that you will implement first:
-1. - Create Account
-2. - Withdraw
-3. - Deposit
+Work Breakdown
+
+VZ:-
+Implemented constructor, deposit, and withdraw
+Worked on Bank Customer
+Added IsEMailValid, edidted tests for Bank Account, added transfer method.
+Created calcInterest method & Tests
+Made admin & VZbranch
+Worked on the admin sequence digram & state diagram.
+
+Mikolaj:-
+
+
+Iyayi:- 
 
 Which classes & methods do you need to implement for these use cases?
 (Indicated which team member is responsible for the implemenation)
