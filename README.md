@@ -15,12 +15,25 @@ Link to UML Class Diagram:
 https://drive.google.com/file/d/1QepPOXiCENl0DUt6mGvYWG8h99i33QnM/view?usp=sharing
 
 Link to Sequence diagrams:-
-1) Admin: - https://drive.google.com/file/d/1SrGlF0_iob0syA0sySCfesPhyAHfG9cn/view?usp=sharing
+1) Admin: - https://drive.google.com/file/d/1SrGlF0_iob0syA0sySCfesPhyAHfG9cn/view?usp=sharing 
+    USE CASE:- Freezing Account
+2) Bank Customer: - https://drive.google.com/file/d/1XW8tthVlRbPR4E1SQdONYssVUfHLKmmA/view?usp=sharing
+    USE CASE:- transfer funds from checking to other bank account
+    
+Link to State Diagram:-
+https://drive.google.com/file/d/1yBMlYdyP8VAGMPBVOUd0q5-2uv-WOZNN/view?usp=sharing
 
-Three Use Cases that you will implement first:
-1. - Create Account
-2. - Withdraw
-3. - Deposit
+Work Breakdown
+
+VZ:-
+Implemented constructor, deposit, and withdraw. Worked on Bank Customer and added IsEMailValid, edidted tests for Bank Account. Added transfer method, 
+and created calcInterest method & Tests. Made and added code to 2 branches - admin & VZbranch. Also worked on the admin sequence digram & state diagram.
+
+Mikolaj:-
+Helped design tests for bank customer related use cases and edited admin integration tests. Designed and implemented simple text user interface, and bank account classes. Modified classes to match client statement (freezing accounts as opposed to customer). Did a sequence diagram  for transfer and state diagram for user interface.
+
+
+Iyayi:- 
 
 Which classes & methods do you need to implement for these use cases?
 (Indicated which team member is responsible for the implemenation)
