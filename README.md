@@ -23,6 +23,9 @@ Link to Sequence diagrams:-
 Link to State Diagram:-
 https://drive.google.com/file/d/1yBMlYdyP8VAGMPBVOUd0q5-2uv-WOZNN/view?usp=sharing
 
+Link to Script:-
+https://docs.google.com/document/d/1nUUeienUW1qN6QO5vHJJzFccouJgKkDH5TlkHI3jrqI/edit?usp=sharing
+
 Work Breakdown
 
 VZ:-
