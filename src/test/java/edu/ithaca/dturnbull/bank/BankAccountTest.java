@@ -8,37 +8,39 @@ class BankAccountTest {
 
     @Test
     void getBalanceEmailTest() {
+        //unit test
         BankAccount bankAccount = new CheckingAccount( 200); //balance is non zero, validity of inputs is tested elsewhere as this is just a getter
 
         assertEquals(200, bankAccount.getBalance(), 0.001);//no need to round floating points as answer should be accurate to 2 decimal places
         
 
         BankAccount bankAccount2 = new SavingsAccount(0.1, 0); //balance is zero, boundary case
-        assertEquals(0, bankAccount2.getBalance(), 0.001); //unit test
-        assertEquals(200, bankAccount.getBalance(), 0.001); //unit test
+        assertEquals(0, bankAccount2.getBalance(), 0.001); 
+        assertEquals(200, bankAccount.getBalance(), 0.001); 
 
     }
 
     @Test
     void withdrawTest() throws InsufficientFundsException, IllegalArgumentException, FrozenException{
+        //unit tests
         BankAccount bankAccount = new CheckingAccount( 200);
         bankAccount.withdraw(100);
 
-        assertEquals(100, bankAccount.getBalance(), 0.001); //unit test
-        assertThrows(InsufficientFundsException.class, () -> bankAccount.withdraw(300)); //unit test
+        assertEquals(100, bankAccount.getBalance(), 0.001); 
+        assertThrows(InsufficientFundsException.class, () -> bankAccount.withdraw(300)); 
 
-        assertThrows(InsufficientFundsException.class, () -> bankAccount.withdraw(101)); //unit test
+        assertThrows(InsufficientFundsException.class, () -> bankAccount.withdraw(101)); 
 
         bankAccount.withdraw(99);
-        assertEquals(1, bankAccount.getBalance()); //unit test
+        assertEquals(1, bankAccount.getBalance()); 
         
         bankAccount.withdraw(1);
-        assertEquals(0, bankAccount.getBalance()); //unit test
+        assertEquals(0, bankAccount.getBalance()); 
 
         BankAccount bankAccount2 = new SavingsAccount(0.05, 200);
         //amount to withdraw must have no more than 2 decimal places
-        assertThrows(IllegalArgumentException.class, () -> bankAccount2.withdraw(0.001)); //unit test
-        assertThrows(IllegalArgumentException.class, () -> bankAccount2.withdraw(0.0132421)); //unit test
+        assertThrows(IllegalArgumentException.class, () -> bankAccount2.withdraw(0.001)); 
+        assertThrows(IllegalArgumentException.class, () -> bankAccount2.withdraw(0.0132421)); 
         bankAccount2.withdraw(0.01); //border case
         bankAccount2.withdraw(0.1);
 
@@ -46,44 +48,45 @@ class BankAccountTest {
         assertThrows(IllegalArgumentException.class, () -> bankAccount2.withdraw(-0.01));
         assertThrows(IllegalArgumentException.class, () -> bankAccount2.withdraw(-100));
         bankAccount2.withdraw(0);//border case
-        assertEquals(199.89, bankAccount2.getBalance(),0.001); //unit test
+        assertEquals(199.89, bankAccount2.getBalance(),0.001); 
         bankAccount2.withdraw(50);
-        assertEquals(149.89, bankAccount2.getBalance(),0.001); //unit test
+        assertEquals(149.89, bankAccount2.getBalance(),0.001); 
 
        
         BankAccount bankAccount3 = new CheckingAccount( 200);
-        assertThrows(IllegalArgumentException.class, () -> bankAccount3.withdraw(-300)); //unit test
+        assertThrows(IllegalArgumentException.class, () -> bankAccount3.withdraw(-300)); 
 
         BankAccount bankAccount4 = new SavingsAccount( 0.02, 3000);
-        assertThrows(IllegalArgumentException.class, () -> bankAccount4.withdraw(-300.376)); //unit test
-        assertThrows(IllegalArgumentException.class, () -> bankAccount4.withdraw(300.376)); //unit test
+        assertThrows(IllegalArgumentException.class, () -> bankAccount4.withdraw(-300.376)); 
+        assertThrows(IllegalArgumentException.class, () -> bankAccount4.withdraw(300.376)); 
     }
     @Test
     void depositTest() throws IllegalArgumentException, FrozenException{ 
+        // unit tests
          BankAccount bankAccount = new CheckingAccount( 350);
          bankAccount.deposit(100);
-         assertEquals(450, bankAccount.getBalance(), 0.001); //unit test
-         assertThrows(IllegalArgumentException.class, () -> bankAccount.deposit(-300)); //unit test
+         assertEquals(450, bankAccount.getBalance(), 0.001); 
+         assertThrows(IllegalArgumentException.class, () -> bankAccount.deposit(-300)); 
 
          BankAccount bankAccount2 = new SavingsAccount(0.05, 350);
          //assertThrows(IllegalArgumentException.class, () -> bankAccount2.deposit(60.970));
-         assertThrows(IllegalArgumentException.class, ()-> bankAccount2.deposit(60.975)); //unit test
+         assertThrows(IllegalArgumentException.class, ()-> bankAccount2.deposit(60.975)); 
 
          //amount deposited must have no more than 2 decimal places
         bankAccount.deposit(0.11);//border case
-        assertEquals(450.11, bankAccount.getBalance(),0.001); //unit test
+        assertEquals(450.11, bankAccount.getBalance(),0.001); 
         bankAccount.deposit(0.01);//border case
-        assertEquals(450.12, bankAccount.getBalance(),0.001); //unit test
-        assertThrows(IllegalArgumentException.class, ()-> bankAccount.deposit(0.001)); //unit test
-        assertThrows(IllegalArgumentException.class, ()-> bankAccount.deposit(12.21423543)); //unit test
+        assertEquals(450.12, bankAccount.getBalance(),0.001); 
+        assertThrows(IllegalArgumentException.class, ()-> bankAccount.deposit(0.001)); 
+        assertThrows(IllegalArgumentException.class, ()-> bankAccount.deposit(12.21423543)); 
 
         //amount deposited must be non negative
-        assertThrows(IllegalArgumentException.class, ()-> bankAccount.deposit(-0.01)); //unit test
-        assertThrows(IllegalArgumentException.class, ()-> bankAccount.deposit(-100)); //unit test
+        assertThrows(IllegalArgumentException.class, ()-> bankAccount.deposit(-0.01)); 
+        assertThrows(IllegalArgumentException.class, ()-> bankAccount.deposit(-100)); 
         bankAccount.deposit(0);//border case
-        assertEquals(450.12, bankAccount.getBalance(),0.001); //unit test
+        assertEquals(450.12, bankAccount.getBalance(),0.001); 
         bankAccount.deposit(100);
-        assertEquals(550.12, bankAccount.getBalance(),0.001); //unit test
+        assertEquals(550.12, bankAccount.getBalance(),0.001); 
     }
 
     
@@ -146,7 +149,7 @@ class BankAccountTest {
         //input parameters for starting balance can't have more than 2 decimal spaces
         bankAccount = new SavingsAccount(0.05, 0.01);// border case
         assertEquals(0.01, bankAccount.getBalance(), 0.001);
-        // integration tests
+        // unit tests
         assertThrows(IllegalArgumentException.class, ()-> new SavingsAccount(0.05,0.001));
         assertThrows(IllegalArgumentException.class, ()-> new SavingsAccount( 0.05,0.1232213));
 
@@ -161,6 +164,7 @@ class BankAccountTest {
 
     @Test
     void isAmountValidTest(){
+        //unit tests
         assertFalse(BankAccount.isAmountValid(-1)); //amount can't be less than  zero
         assertFalse(BankAccount.isAmountValid(-0.01)); //amount can't be less than zero
         assertTrue(BankAccount.isAmountValid(0)); //amount can't be less than zero, border case
