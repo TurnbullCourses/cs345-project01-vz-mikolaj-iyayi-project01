@@ -14,7 +14,9 @@ public abstract class BankAccount {
     
 
     /**
+     * BankAccount - constructor
      * @throws IllegalArgumentException if email is invalid
+     * method type: mutator
      */
     public BankAccount(double startingBalance) throws IllegalArgumentException{
         if(!isAmountValid(startingBalance)){
@@ -27,7 +29,8 @@ public abstract class BankAccount {
 
     /**
      * returns the current balance in the bank account
-     * @return
+     * @return balance
+     * method type: accessor
      */
     public double getBalance(){
         return balance;
@@ -37,6 +40,9 @@ public abstract class BankAccount {
 
     /**
      * @post reduces the balance by amount if amount is non-negative and smaller than balance
+     * @throws InsufficientFundsException
+     * @throws FrozenException
+     * method type: mutator
      */
     public void withdraw (double amount) throws InsufficientFundsException, FrozenException{
         if(frozen){
@@ -59,6 +65,8 @@ public abstract class BankAccount {
      * Increases account balance by amount
      * @param amount
      * @throws IllegalArgumentException if amount is invalid
+     * @throws FrozenException if account is frozen
+     * method type: mutator
      */
     public void deposit(double amount) throws IllegalArgumentException, FrozenException{
         if(frozen){
@@ -75,6 +83,7 @@ public abstract class BankAccount {
 
     /**verifies the validity of amount
     * @return true if the amount is positive and has two decimal points or less, and false otherwise
+    *  method type - accessor - checks amount
     */
     public static boolean  isAmountValid(double amount){
         String doubleStr = Double.toString(amount);
@@ -99,6 +108,8 @@ public abstract class BankAccount {
      * @param account
      * @throws InsufficientFundsException
      * @throws IllegalArgumentException
+     * @throws FrozenException
+     * method type: mutator
      */
     
     public void transfer(double amount, BankAccount account) throws InsufficientFundsException, IllegalArgumentException, FrozenException{
@@ -121,6 +132,7 @@ public abstract class BankAccount {
     /**
      *calculate and add interest to the balance
      * @param interestRate 
+     * method type: mutator
      */
     public void calcInterest(double interestRate){
         if(!isAmountValid(interestRate)){

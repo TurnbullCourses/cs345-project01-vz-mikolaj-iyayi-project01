@@ -14,6 +14,7 @@ public class Admin {
     /**
      * freezes the bank account
      * @param account
+     * method type: mutator 
      */
     public static void freezeAccount(BankAccount account){
         account.frozen = true;
@@ -22,6 +23,7 @@ public class Admin {
     /**
      * if the customer's account is frozen, it enables all bank account features
      * @param account
+     * method type: mutator 
      */
     public static void unfreezeAccount(BankAccount account){
         account.frozen = false;

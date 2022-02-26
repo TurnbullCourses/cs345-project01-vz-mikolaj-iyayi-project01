@@ -26,6 +26,7 @@ public class BankCustomer {
     * @param accountID account ID
     * @param email email address
     * @param id ID
+    method type: mutator
     */
 
     public BankCustomer(String firstName, String lastName, int accountID, String email, int id) {
@@ -45,8 +46,8 @@ public class BankCustomer {
 
     /**
      * Adds a new savings account to the bank customer account
-     * 
      * @param savings a new savings account
+     * method type: mutator
      */
     public void addSavingsAccount(SavingsAccount savings) {
         this.savings = savings;
@@ -54,8 +55,8 @@ public class BankCustomer {
 
     /**
      * Adds a new checking account to the bank customer account
-     * 
      * @param checking a new checking account
+     * method type: mutator
      */
     public void addCheckingAccount(CheckingAccount checking) {
         this.checking = checking;
@@ -64,6 +65,7 @@ public class BankCustomer {
      * deposits amount into checking account unless it's frozen
      * @param amount
      * @throws FrozenException
+     * method type: mutator
      */
     public void depositChecking(double amount) throws FrozenException {
         if(checking == null){
@@ -76,6 +78,7 @@ public class BankCustomer {
      * deposits amount into savings account unless account is frozen
      * @param amount
      * @throws FrozenException
+     * method type: mutator
      */
     public void depositSavings(double amount) throws FrozenException{
         if(savings == null){
@@ -89,6 +92,7 @@ public class BankCustomer {
      * @param amount
      * @throws FrozenException
      * @throws InsufficientFundsException
+     * method type: mutator
      */
     public void withdrawSavings(double amount) throws FrozenException, InsufficientFundsException{
         if(savings == null){
@@ -102,6 +106,7 @@ public class BankCustomer {
      * @param amount
      * @throws FrozenException
      * @throws InsufficientFundsException
+     * method type: mutator
      */
     public void withdrawChecking(double amount) throws FrozenException, InsufficientFundsException{
         if(checking == null){
@@ -116,6 +121,7 @@ public class BankCustomer {
      * @param transferee
      * @throws FrozenException
      * @throws InsufficientFundsException
+     * method type: mutator
      */
     public void transferChecking(double amount, BankAccount transferee) throws FrozenException, InsufficientFundsException{
         if(checking == null){
@@ -130,6 +136,7 @@ public class BankCustomer {
      * @param transferee
      * @throws FrozenException
      * @throws InsufficientFundsException
+     * method type: mutator
      */
     public void transferSavings(double amount, BankAccount transferee) throws FrozenException, InsufficientFundsException{
         if(savings == null){
@@ -140,7 +147,8 @@ public class BankCustomer {
     }
     /**
      * returns the current balance on the checking balance
-     * @return
+     * @return checkings balance
+     * method type: accessor
      */
     public double getCheckingBalance() {
         if(checking == null){
@@ -150,14 +158,16 @@ public class BankCustomer {
     }
     /**
      * returns the current balance on the savings account
-     * @return
+     * @return 
+     * method type: accessor
      */
     public double getSavingsBalance() {
     return savings.getBalance();
     }
     /**
      * returns the first name of the customer
-     * @return
+     * @return 
+     * method type: accessor
      */
     public String getFirstName() {
         return firstName;
@@ -165,6 +175,7 @@ public class BankCustomer {
     /**
      * returns the last name of the customer
      * @return
+     * method type: accessor
      */
     public String getLastName() {
         return lastName;
@@ -172,6 +183,7 @@ public class BankCustomer {
     /**
      * returns the customer's id
      * @return
+     * method type: accessor
      */
     public int getId() {
         return id;
@@ -180,6 +192,7 @@ public class BankCustomer {
      * Checks for validity of email (must have format a@b.cc)
      * @param email
      * @return
+     * method type: accessor
      */
     public static boolean isEmailValid(String email) {
         if (email.indexOf('@') == -1) {
@@ -211,6 +224,8 @@ public class BankCustomer {
      * Transfers funds from the client's checking to his savings account
      * @param amount
      * @throws InsufficientFundsException if the amount would overdraw the checking account
+     * @throws FrozenException if account is frozen
+     * method type: mutator
      */
     public void checkingToSavings(double amount) throws InsufficientFundsException, FrozenException{
         if(checking == null){
@@ -226,6 +241,8 @@ public class BankCustomer {
      * transfers funds from the client's savings to his checking account
      * @param amount
      * @throws InsufficientFundsException if the amount would overdraw the savings account
+     * @throws FrozenException if account is frozen
+     * method type: mutator
      */
     public void savingsToChecking(double amount) throws InsufficientFundsException, FrozenException{
         if(checking == null){

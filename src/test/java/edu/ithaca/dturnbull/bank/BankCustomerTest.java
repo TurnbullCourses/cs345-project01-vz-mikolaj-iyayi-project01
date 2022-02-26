@@ -9,21 +9,22 @@ public class BankCustomerTest {
 
     @Test
     public void savingsCheckingTest() throws InsufficientFundsException, FrozenException{
-        
+
+        //system test
         BankCustomer client = new BankCustomer("Penny", "Heinsfield", 32519293, "penny89@gmail.com", 728);
         client.addCheckingAccount(new CheckingAccount(1000));
         client.addSavingsAccount(new SavingsAccount(0.05, 0));
 
-        assertThrows(InsufficientFundsException.class, () -> client.savingsToChecking(500));
-        assertThrows(IllegalArgumentException.class, () -> client.savingsToChecking(-5));
+        assertThrows(InsufficientFundsException.class, () -> client.savingsToChecking(500)); //unit test
+        assertThrows(IllegalArgumentException.class, () -> client.savingsToChecking(-5)); //unit test
 
         client.checkingToSavings(30);
-        assertEquals(30, client.getSavingsBalance());
-        assertEquals(970, client.getCheckingBalance());
+        assertEquals(30, client.getSavingsBalance());  //unit test
+        assertEquals(970, client.getCheckingBalance()); //unit test
 
         client.savingsToChecking(15);
-        assertEquals(15, client.getSavingsBalance());
-        assertEquals(985, client.getCheckingBalance());
+        assertEquals(15, client.getSavingsBalance()); //unit test
+        assertEquals(985, client.getCheckingBalance()); //unit test
     }
 
     
