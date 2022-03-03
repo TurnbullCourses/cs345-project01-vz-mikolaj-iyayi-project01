@@ -174,12 +174,12 @@ class BankAccountTest {
 
     }
     @Test
-    void calcInterestTest() throws IllegalArgumentException{
-        BankAccount account1 = new SavingsAccount(1.3, 500);
-        account1.calcInterest(1.3);
+    void addInterestTest() throws IllegalArgumentException{
+        SavingsAccount account1 = new SavingsAccount(1.3, 500);
+        account1.addInterest(1.3);
         assertEquals(506.5, account1.getBalance());
-        assertThrows(IllegalArgumentException.class, ()-> account1.calcInterest(-1.3));
-        assertThrows(IllegalArgumentException.class, () -> account1.calcInterest(-10000.3));
+        assertThrows(IllegalArgumentException.class, ()-> account1.addInterest(-1.3));
+        assertThrows(IllegalArgumentException.class, () -> account1.addInterest(-10000.3));
         
     }
     

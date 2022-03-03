@@ -3,20 +3,20 @@ package edu.ithaca.dturnbull.bank;
 public abstract class BankAccount {
 
     
-    private double balance;
+    protected double balance;
     protected boolean frozen;
-    
 
+    //private AccountType type;
+    
     /**
      * @throws IllegalArgumentException if email is invalid
      */
-    public BankAccount(double startingBalance) throws IllegalArgumentException{
-        if(!isAmountValid(startingBalance)){
+    public BankAccount(double balanceIn) throws IllegalArgumentException{
+        if(!isAmountValid(balanceIn)){
             throw new IllegalArgumentException("invalid amount entered");
         }
-            this.balance = startingBalance;
+            this.balance = balanceIn;
             frozen = false;
-        
     }
 
     /**
@@ -26,8 +26,6 @@ public abstract class BankAccount {
     public double getBalance(){
         return balance;
     }
-
-    
 
     /**
      * @post reduces the balance by amount if amount is non-negative and smaller than balance
@@ -39,7 +37,6 @@ public abstract class BankAccount {
         
         if(!isAmountValid(amount)){
             throw new IllegalArgumentException("amount cannot be negative or have more than 2 decimal places");
-
         }
         else if (amount <= balance){
             balance -= amount;
@@ -75,7 +72,6 @@ public abstract class BankAccount {
 
         if(amount < 0){
             return false;
-            
         }
         else if(doubleStr.substring(doubleStr.lastIndexOf('.'), doubleStr.length() - 1).length() > 2){ //check if amount has 5 or more digits (possibility that there is 3 decimals) 300.67 , 30.678
             return false;
@@ -83,8 +79,6 @@ public abstract class BankAccount {
         else{
             return true;
         }
-
-
     }
     
     /**
@@ -95,11 +89,11 @@ public abstract class BankAccount {
      * @throws IllegalArgumentException
      */
     
-    public void transfer(double amount, BankAccount account) throws InsufficientFundsException, IllegalArgumentException, FrozenException{
+    public void transfer(double amount, BankAccount accountTo) throws InsufficientFundsException, IllegalArgumentException, FrozenException{
         if(frozen){
             throw new FrozenException("This account has been frozen");
         }
-        else if(account.frozen){
+        else if(accountTo.frozen){
             throw new FrozenException("the transferee's account has been frozen");
         }
         
@@ -108,29 +102,7 @@ public abstract class BankAccount {
         }
         else{
            withdraw(amount);
-            account.deposit(amount); //account to which we trasfer to
-        }
-    
-    }
-    /**
-     *calculate and add interest to the balance
-     * @param interestRate 
-     */
-    public void calcInterest(double interestRate){
-        if(!isAmountValid(interestRate)){
-            throw new IllegalArgumentException("Amount Invalid");
-        }
-        else{
-        double interest = this.balance * interestRate/100.0;
-        this.balance = this.balance + interest;
+            accountTo.deposit(amount); //account to which we trasfer to
         }
     }
-
-    
-
-    
-    
-    
-
-   
 }

@@ -13,6 +13,7 @@ public class BankCustomer {
     private int accountID;
     private String email;
     public int id;
+    protected BankAccount accounts[]; 
     private SavingsAccount savings;
     private CheckingAccount checking;
     
@@ -32,118 +33,118 @@ public class BankCustomer {
         }
     }
 
-    /**
-     * Adds a new savings account to the bank customer account
-     * 
-     * @param savings a new savings account
-     */
-    public void addSavingsAccount(SavingsAccount savings) {
-        this.savings = savings;
-    }
+    // /**
+    //  * Adds a new savings account to the bank customer account
+    //  * 
+    //  * @param savings a new savings account
+    //  */
+    // public void addSavingsAccount(SavingsAccount savings) {
+    //     this.savings = savings;
+    // }
 
-    /**
-     * Adds a new checking account to the bank customer account
-     * 
-     * @param checking a new checking account
-     */
-    public void addCheckingAccount(CheckingAccount checking) {
-        this.checking = checking;
-    }
-    /**
-     * deposits amount into checking account unless it's frozen
-     * @param amount
-     * @throws FrozenException
-     */
-    public void depositChecking(double amount) throws FrozenException {
-        if(checking == null){
-            throw new NullPointerException("There is no checking account for this customer"); 
-        }
-        else{checking.deposit(amount);}
+    // /**
+    //  * Adds a new checking account to the bank customer account
+    //  * 
+    //  * @param checking a new checking account
+    //  */
+    // public void addCheckingAccount(CheckingAccount checking) {
+    //     this.checking = checking;
+    // }
+    // /**
+    //  * deposits amount into checking account unless it's frozen
+    //  * @param amount
+    //  * @throws FrozenException
+    //  */
+    // public void depositChecking(double amount) throws FrozenException {
+    //     if(checking == null){
+    //         throw new NullPointerException("There is no checking account for this customer"); 
+    //     }
+    //     else{checking.deposit(amount);}
     
-    }
-    /**
-     * deposits amount into savings account unless account is frozen
-     * @param amount
-     * @throws FrozenException
-     */
-    public void depositSavings(double amount) throws FrozenException{
-        if(savings == null){
-            throw new NullPointerException("There is no savings account for this customer"); 
-        }
+    // }
+    // /**
+    //  * deposits amount into savings account unless account is frozen
+    //  * @param amount
+    //  * @throws FrozenException
+    //  */
+    // public void depositSavings(double amount) throws FrozenException{
+    //     if(savings == null){
+    //         throw new NullPointerException("There is no savings account for this customer"); 
+    //     }
         
-        savings.deposit(amount);
-    }
-    /**
-     * withdraws amount from savings account unless account is frozen
-     * @param amount
-     * @throws FrozenException
-     * @throws InsufficientFundsException
-     */
-    public void withdrawSavings(double amount) throws FrozenException, InsufficientFundsException{
-        if(savings == null){
-            throw new NullPointerException("There is no savings account for this customer"); 
-        }
+    //     savings.deposit(amount);
+    // }
+    // /**
+    //  * withdraws amount from savings account unless account is frozen
+    //  * @param amount
+    //  * @throws FrozenException
+    //  * @throws InsufficientFundsException
+    //  */
+    // public void withdrawSavings(double amount) throws FrozenException, InsufficientFundsException{
+    //     if(savings == null){
+    //         throw new NullPointerException("There is no savings account for this customer"); 
+    //     }
         
-        savings.withdraw(amount);
-    }
-    /**
-     * withdraws amount from checking account unless account is frozen
-     * @param amount
-     * @throws FrozenException
-     * @throws InsufficientFundsException
-     */
-    public void withdrawChecking(double amount) throws FrozenException, InsufficientFundsException{
-        if(checking == null){
-            throw new NullPointerException("There is no checking account for this customer"); 
-        }
+    //     savings.withdraw(amount);
+    // }
+    // /**
+    //  * withdraws amount from checking account unless account is frozen
+    //  * @param amount
+    //  * @throws FrozenException
+    //  * @throws InsufficientFundsException
+    //  */
+    // public void withdrawChecking(double amount) throws FrozenException, InsufficientFundsException{
+    //     if(checking == null){
+    //         throw new NullPointerException("There is no checking account for this customer"); 
+    //     }
         
-        checking.withdraw(amount);
-    }
-    /**
-     * transfers funds from the checking account to another account, unless the account is frozen
-     * @param amount
-     * @param transferee
-     * @throws FrozenException
-     * @throws InsufficientFundsException
-     */
-    public void transferChecking(double amount, BankAccount transferee) throws FrozenException, InsufficientFundsException{
-        if(checking == null){
-            throw new NullPointerException("There is no checking account for this customer"); 
-        }
+    //     checking.withdraw(amount);
+    // }
+    // /**
+    //  * transfers funds from the checking account to another account, unless the account is frozen
+    //  * @param amount
+    //  * @param transferee
+    //  * @throws FrozenException
+    //  * @throws InsufficientFundsException
+    //  */
+    // public void transferChecking(double amount, BankAccount transferee) throws FrozenException, InsufficientFundsException{
+    //     if(checking == null){
+    //         throw new NullPointerException("There is no checking account for this customer"); 
+    //     }
         
-        checking.transfer(amount, transferee);
-    }
-    /**
-     * transfers funds from the savings account to another account, unless the account is frozen
-     * @param amount
-     * @param transferee
-     * @throws FrozenException
-     * @throws InsufficientFundsException
-     */
-    public void transferSavings(double amount, BankAccount transferee) throws FrozenException, InsufficientFundsException{
-        if(savings == null){
-            throw new NullPointerException("There is no savings account for this customer"); 
-        }
+    //     checking.transfer(amount, transferee);
+    // }
+    // /**
+    //  * transfers funds from the savings account to another account, unless the account is frozen
+    //  * @param amount
+    //  * @param transferee
+    //  * @throws FrozenException
+    //  * @throws InsufficientFundsException
+    //  */
+    // public void transferSavings(double amount, BankAccount transferee) throws FrozenException, InsufficientFundsException{
+    //     if(savings == null){
+    //         throw new NullPointerException("There is no savings account for this customer"); 
+    //     }
         
-        savings.transfer(amount, transferee);
-    }
-    /**
-     * returns the current balance on the checking balance
-     * @return
-     */
-    public double getCheckingBalance() {
-        if(checking == null){
-            throw new NullPointerException("There is no checking account for this customer"); 
-        }
-        return checking.getBalance();
-    }
-    /**
-     * returns the current balance on the savings account
-     * @return
-     */
-    public double getSavingsBalance() {
-    return savings.getBalance();
-    }
+    //     savings.transfer(amount, transferee);
+    // }
+    // /**
+    //  * returns the current balance on the checking balance
+    //  * @return
+    //  */
+    // public double getCheckingBalance() {
+    //     if(checking == null){
+    //         throw new NullPointerException("There is no checking account for this customer"); 
+    //     }
+    //     return checking.getBalance();
+    // }
+    // /**
+    //  * returns the current balance on the savings account
+    //  * @return
+    //  */
+    // public double getSavingsBalance() {
+    // return savings.getBalance();
+    // }
     /**
      * returns the first name of the customer
      * @return
@@ -196,34 +197,34 @@ public class BankCustomer {
 
     
     
-    /**
-     * Transfers funds from the client's checking to his savings account
-     * @param amount
-     * @throws InsufficientFundsException if the amount would overdraw the checking account
-     */
-    public void checkingToSavings(double amount) throws InsufficientFundsException, FrozenException{
-        if(checking == null){
-            throw new NullPointerException("There is no checking account for this customer"); 
-        }
-        if(savings == null){
-            throw new NullPointerException("There is no savings account for this customer"); 
-        }
-        checking.transfer(amount, savings);
-    }
+    // /**
+    //  * Transfers funds from the client's checking to his savings account
+    //  * @param amount
+    //  * @throws InsufficientFundsException if the amount would overdraw the checking account
+    //  */
+    // public void checkingToSavings(double amount) throws InsufficientFundsException, FrozenException{
+    //     if(checking == null){
+    //         throw new NullPointerException("There is no checking account for this customer"); 
+    //     }
+    //     if(savings == null){
+    //         throw new NullPointerException("There is no savings account for this customer"); 
+    //     }
+    //     checking.transfer(amount, savings);
+    // }
 
-    /**
-     * transfers funds from the client's savings to his checking account
-     * @param amount
-     * @throws InsufficientFundsException if the amount would overdraw the savings account
-     */
-    public void savingsToChecking(double amount) throws InsufficientFundsException, FrozenException{
-        if(checking == null){
-            throw new NullPointerException("There is no checking account for this customer"); 
-        }
-        if(savings == null){
-            throw new NullPointerException("There is no savings account for this customer"); 
-        }
-        savings.transfer(amount, checking);
-    }
+    // /**
+    //  * transfers funds from the client's savings to his checking account
+    //  * @param amount
+    //  * @throws InsufficientFundsException if the amount would overdraw the savings account
+    //  */
+    // public void savingsToChecking(double amount) throws InsufficientFundsException, FrozenException{
+    //     if(checking == null){
+    //         throw new NullPointerException("There is no checking account for this customer"); 
+    //     }
+    //     if(savings == null){
+    //         throw new NullPointerException("There is no savings account for this customer"); 
+    //     }
+    //     savings.transfer(amount, checking);
+    // }
 
 }
